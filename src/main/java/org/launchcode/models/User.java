@@ -12,9 +12,9 @@ public class User {
     private Date dateCreated;
 
     public User() {
-        this.dateCreated = new Date();
         this.id = nextId;
         nextId++;
+        this.dateCreated = new Date();
     }
 
     public User(String username, String email, String password) {

@@ -6,8 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @Controller
 @RequestMapping("user")
 public class UserController {
@@ -17,13 +15,11 @@ public class UserController {
         return "user/add";
     }
 
-    @PostMapping
+    @PostMapping("")
     public String processAddUserForm(Model model, @ModelAttribute User user, String verify) {
-
         if (verify.equals(user.getPassword())) {
             UserData.add(user);
-            Collection<User> users = UserData.getAll();
-            model.addAttribute("users", users);
+            model.addAttribute("users", UserData.getAll());
             return "user/index";
         } else {
             model.addAttribute("username", user.getUsername());
@@ -33,10 +29,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("detail/{userId}")
-    public String displayUserDetails(Model model, @PathVariable int userId) {
-        model.addAttribute("user", UserData.getById(userId));
+    @GetMapping("detail/{id}")
+    public String displayUserDetails(Model model, @PathVariable int id) {
+        model.addAttribute("user", UserData.getById(id));
         return "user/detail";
     }
-
 }
